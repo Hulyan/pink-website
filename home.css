@@ -8,6 +8,17 @@
     src: url(fonts/Daydream.ttf);
 }
 
+#timer {
+    font-size: 3vw;
+    font-family: 'cute';
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1vw;
+    border-radius: 1vw;
+    text-align: center;
+    margin: 0;
+}
+
 .pop {
     position: absolute;
     font-family: Arial, Helvetica, sans-serif;
@@ -94,7 +105,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 8vh;
+    gap: 3vh;
     background: #FFB6C1;
     padding: 2vw 5vw;
     border-radius: 3vw;
@@ -102,6 +113,8 @@ body {
 
 h1 {
     font-size: 5vw;
+    margin: 0;
+    padding: 0;
     font-family: 'cute';
     color: white;
     text-transform: uppercase;
@@ -114,6 +127,7 @@ h1 {
     right: 1.5vw;
     font-size: 3vw;
     margin: 0;
+    padding: 0;
     font-family: 'cute';
     color: white;
     -webkit-text-stroke: .04vw pink;
@@ -131,6 +145,7 @@ h1 {
     text-transform: uppercase;
     cursor: pointer;
     font-weight: 600;
+    margin: 0;
 }
 
 .reset:hover {
@@ -144,6 +159,8 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     gap: 1vw;
+    margin: 0;
+    padding: 0;
     transform-style: preserve-3d;
     perspective: 32vw;
 }

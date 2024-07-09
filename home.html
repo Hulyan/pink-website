@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <title>
     fyp (for you po!)
@@ -31,6 +31,7 @@
     </div>
     <div class="container">
         <h1>memory cards</h1>
+        <div id="timer">99:00</div>
         <div class="game"></div>
         <button class="reset" onclick="window.location.reload();">Restart</button>
         <audio id="card-click-sound">
@@ -44,6 +45,31 @@
     <p class="end">© trae</p>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <script>
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            var interval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    alert("Time's up!");
+                    location.reload(); // Reset the game
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            var ninetyNineMinutes = 60 * 99,
+                display = document.querySelector('#timer');
+            startTimer(ninetyNineMinutes, display);
+        };
+
         const matchSound = document.getElementById('matchSound');
         const wrongSound = document.getElementById('wrongSound');
         const winSound = document.getElementById('winSound');

@@ -77,6 +77,8 @@ button {
     position: absolute;
     top: 1.5vw;
     left: 1.5vw;
+    width: 1vw;
+    height: auto;
 }
 
 .play-button {
@@ -85,6 +87,8 @@ button {
     position: absolute;
     top: 1.5vw;
     left: 1.5vw;
+    width: 1vw;
+    height: auto;
 }
 
 h1 {

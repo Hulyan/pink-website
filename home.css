@@ -1,3 +1,72 @@
+@font-face {
+    font-family: 'cute';
+    src: url(fonts/Litebulb\ 8-bit.ttf);
+}
+
+@font-face {
+    font-family: 'retro';
+    src: url(fonts/Daydream.ttf);
+}
+
+.pop {
+    position: absolute;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 4vw; /* Adjust as needed */
+    left: 14vw;
+    width: 20vw;
+    font-size: 1.2vw;
+    margin: 0 auto;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    color: rgb(213, 131, 131);
+    padding: .5vw 1vw;
+    border-radius: 0.5vw;
+    z-index: 1000; /* Ensure popup is on top */
+    display: none;
+}
+
+.thanks {
+    position: absolute;
+    font-family: 'retro';
+    top: 37vw; /* Adjust as needed */
+    left: 50vw;
+    font-size: 1vw;
+    margin: 0 auto;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    color: rgb(213, 131, 131);
+    padding: .5vw 1vw;
+    border-radius: 0.5vw;
+    z-index: 1000; /* Ensure popup is on top */
+    display: none;
+}
+
+.embed {
+    width: 42.8vw;
+    height: 24vw;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    z-index: 2;
+    backdrop-filter: blur(5px); /* Blurs the background */
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    display: none;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -6,52 +75,115 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-}
-
-h1 {
-    text-align: center;
-    font-weight: 700;
-    font-size: 30vw;
-}
-
-p {
-    text-align: center;
-    font-size: 5vw;
-    font-weight: bold;
-}
-
-.actions {
+    min-height: 100vh;
+    min-width: 100vw;
+    align-items: center;
     display: flex;
     justify-content: center;
 }
 
-.actions button {
-    padding: 8px 16px;
-    font-size: 1vw;
-    border-radius: 10px;
-    background-color: #27ae60;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 8vh;
+    background: #FFB6C1;
+    padding: 2vw 5vw;
+    border-radius: 3vw;
+}
+
+h1 {
+    font-size: 5vw;
+    font-family: 'cute';
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.end {
+    position: absolute;
+    bottom: 1.5vw;
+    right: 1.5vw;
+    font-size: 3vw;
+    margin: 0;
+    font-family: 'cute';
+    color: white;
+    -webkit-text-stroke: .04vw pink;
+}
+
+.reset {
+    padding: 1vw 3vw;
+    color: pink;
+    background-color: white;
+    border: none;
+    font-family: 'retro';
+    font-size: 1.5vw;
+    letter-spacing: 0.1vw;
+    border-radius: 4vw;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.reset:hover {
+    background-color: pink;
     color: white;
 }
 
-.grid-container {
-    display: grid;
-    justify-content: center;
-    grid-gap: 16px;
-    grid-template-columns: repeat(6, 140px);
-    grid-template-rows: repeat(2, calc(140px / 2 * 3));
-}
-
-.card {
-    height: calc(140px / 2 * 3);
-    width: 140px;
-    border-radius: 10px;
-    background-color: white;
-    position: relative;
+.game {
+    width: 45vw;
+    height: 22vw;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vw;
     transform-style: preserve-3d;
-    transition: all 0.5s ease-in-out;
+    perspective: 32vw;
 }
 
-.front-image {
-    width: 20vw;
-    height: 20vw;
+.item {
+    position: relative;
+    width: 6.5vw;
+    height: 6.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.25s;
+    transform: rotateY(180deg);
+}
+
+.item img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    box-shadow: 0.3vw 0.3vw 0.3vw white;
+    border-radius: 0.6vw 0.6vw;
+}
+
+.item.boxOpen {
+    transform: rotateY(0deg);
+}
+
+.item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(243deg, rgb(255, 253, 221) 13.4%, rgb(248, 215, 215) 82.1%);
+    border-radius: 0.6vw 0.6vw;
+    transition: 0.25s;
+    transform: rotateY(0deg);
+    backface-visibility: hidden;
+}
+
+.boxOpen::after,
+.boxMatch:after
+{
+    transform: rotateY(180deg);
 }

@@ -1,0 +1,34 @@
+[
+    {
+        "image": "../images/adobar.jpg",
+        "name": "adobar"
+    },
+    {
+        "image": "../images/fly-insect.gif",
+        "name": "fly"
+    },
+    {
+        "image": "../images/kilig.jpg",
+        "name": "kilig"
+    },
+    {
+        "image": "../images/kilig2.jpg",
+        "name": "kilig2"
+    },
+    {
+        "image": "../images/ok.jpg",
+        "name": "ok"
+    },
+    {
+        "image": "../images/pocari.jpg",
+        "name": "pocari"
+    },
+    {
+        "image": "../images/ta.jpg",
+        "name": "ta"
+    },
+    {
+        "image": "../images/yipee.jpg",
+        "name": "yipee"
+    }
+]

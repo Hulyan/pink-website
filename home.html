@@ -10,11 +10,141 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <div class="grid-container"></div>
-        <p>Score: <span class="score"></span></p>
-    <div class="actions">
-        <button onclick="restart()">Restart</button>
+    <div class="overlay" id="overlay"></div>
+    <div class="pop" id="letter">
+        helo, long message warning (jk) <br>
+        CONGRATS (bleh), ang reward ko sana dito yung name ko kaso wala na na-reveal na e. <br>
+        All rewards that I was thought of were my birthday, fave ulam, dessert, how old I am, and finally the face card reveal. <br>
+        Pero ok na yun, wag mo na i-overthink. Ikaw kasi ang kulit kulit kulit, djk. <br>
+        Basta ayun, letting you know that I did this project for you in the 1st week we've known each other (di ko na talaga maalala exact) <br>
+        Not to be cliche but when the day I said I'm gonna be better for this girl, I started to see the world more brightly. <br>
+        So glad to know you in this life. <br>
+        Let's meet each other again, today, tomorrow, and the day after tomorrow, and again, and again. (sorry poetic na naman sha). <br>
+        <br>
+        - julian
     </div>
-    <script src="game.js"></script>
+    <div class="thanks" id="thanks">Thanks for playing!</div>
+    <div class="popup" id="popup">
+        <div class="embed">
+            <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/L3tsYC5OYhQ?si=cTn7Ses83TYrnFfB&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div class="container">
+        <h1>memory cards</h1>
+        <div class="game"></div>
+        <button class="reset" onclick="window.location.reload();">Restart</button>
+        <audio id="card-click-sound">
+            <source src="audio/click1.wav" type="audio/wav">
+            Your browser does not support the audio element.
+        </audio>
+        <audio id="matchSound" src="audio/found.wav"></audio>
+        <audio id="wrongSound" src="audio/wrong.wav"></audio>
+        <audio id="winSound" src="audio/cheer.mp3"></audio>
+    </div>
+    <p class="end">© trae</p>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script>
+        const matchSound = document.getElementById('matchSound');
+        const wrongSound = document.getElementById('wrongSound');
+        const winSound = document.getElementById('winSound');
+        const overlay = document.getElementById('overlay');
+        const popup = document.getElementById('popup');
+        const letter = document.getElementById('letter');
+        const thanks = document.getElementById('thanks');
+        const images = [
+            'images/adobar.jpg',
+            'images/adobar.jpg',
+            'images/fly-insect.gif',
+            'images/fly-insect.gif',
+            'images/kilig.jpg',
+            'images/kilig.jpg',
+            'images/kilig2.jpg',
+            'images/kilig2.jpg',
+            'images/ok.jpg',
+            'images/ok.jpg',
+            'images/pocari.jpg',
+            'images/pocari.jpg',
+            'images/ta.jpg',
+            'images/ta.jpg',
+            'images/yipee.jpg',
+            'images/yipee.jpg',
+            'images/bea.jpg',
+            'images/bea.jpg'
+        ];
+
+        var shuf_img = images.sort(() => (Math.random() > .5) ? 2 : -1);
+
+        for(var i = 0; i < images.length; i++) {
+            let box = document.createElement('div')
+            box.className = 'item';
+            let img = document.createElement('img');
+            img.src = shuf_img[i];
+            
+            box.onclick = function(){
+                this.classList.add('boxOpen')
+                setTimeout(function() {
+                    let openBoxes = document.querySelectorAll('.boxOpen');
+                    if (openBoxes.length > 1) {
+                        let firstImg = openBoxes[0].querySelector('img').src;
+                        let secondImg = openBoxes[1].querySelector('img').src;
+                        if (firstImg === secondImg) {
+                            openBoxes[0].classList.add('boxMatch');
+                            openBoxes[1].classList.add('boxMatch');
+
+                             // Play the sound effect
+                            matchSound.currentTime = 0; // Reset to start
+                            matchSound.play();
+
+                            openBoxes[0].classList.remove('boxOpen');
+                            openBoxes[1].classList.remove('boxOpen');
+
+                            if (document.querySelectorAll('.boxMatch').length === images.length) {
+                                winSound.currentTime = 0; // Reset to start
+                                winSound.play();
+
+                                var duration = 15 * 5000;
+                                var animationEnd = Date.now() + duration;
+                                var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 3 };
+
+                                function randomInRange(min, max) {
+                                    return Math.random() * (max - min) + min;
+                                }
+
+                                var interval = setInterval(function() {
+                                    var timeLeft = animationEnd - Date.now();
+
+                                if (timeLeft <= 0) {
+                                    return clearInterval(interval);
+                                }
+
+                                var particleCount = 50 * (timeLeft / duration);
+                                // since particles fall down, start a bit higher than random
+                                confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+                                confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
+                                }, 250);
+
+                                overlay.style.display = 'block';
+                                popup.style.display = 'block';
+                                letter.style.display = 'block';
+                                thanks.style.display = 'block';
+                            }
+                        } else {
+                            openBoxes[1].classList.remove('boxOpen');
+                            openBoxes[0].classList.remove('boxOpen');
+                            
+                            wrongSound.currentTime = 0; // Reset to start
+                            wrongSound.play();
+                        }
+                    }
+                }, 900)
+                // Play sound effect when card is clicked
+                document.getElementById('card-click-sound').currentTime = 0.1;
+                document.getElementById('card-click-sound').play();
+            }
+
+            box.appendChild(img);
+            document.querySelector('.game').appendChild(box);
+        }
+    </script>
 </body>
 </html>

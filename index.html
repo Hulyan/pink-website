@@ -10,13 +10,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-   
+    <button class="play-button" onclick="playMusic()">
+        <img src="images/play1.png" alt="Play Music" class="button-icon">
+    </button>
+    <button class="pause-button" onclick="pauseMusic()">
+        <img src="images/pause1.png" alt="Pause Music" class="button-icon">
+    </button>
+    <div class="popup" id="play-me-popup">Play Me!</div>
     <a href="ins.html">   
     <div class="welcome">
         <img class="gato" src="images/sebas-bleizeffer.gif">
         <h1>click me please!</h1>
     </div>
     </a>
+    <audio autoplay unmuted id="background-music" loop>
+        <source src="audio/bg.wav" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
     <img class="kirby" src="images/sweetragers-kirby.gif">
    <p class="copy">yipiee</p>
    <p class="copy1">yipiee</p>
@@ -25,5 +35,38 @@
    <p class="copy4">yipiee</p>
    <p class="copy5">yipiee</p>
    <p class="end">© trae</p>
+
+   <script>
+        const backgroundMusic = document.getElementById('background-music');
+        const playButton = document.querySelector('.play-button');
+        const pauseButton = document.querySelector('.pause-button');
+        const playMePopup = document.getElementById('play-me-popup');
+
+        pauseButton.style.display = 'none';
+
+        function playMusic() {
+            backgroundMusic.play().then(() => {
+                playButton.style.display = 'none';
+                pauseButton.style.display = 'block';
+                playMePopup.style.display = 'none';
+            }).catch(error => {
+                console.error("Error playing audio: ", error);
+            });
+        }
+
+        function pauseMusic() {
+            backgroundMusic.pause();
+            playButton.style.display = 'block';
+            pauseButton.style.display = 'none';
+            playMePopup.style.display = 'block';
+        }
+
+        // Auto-play on first user interaction
+        document.body.addEventListener('click', function() {
+            if (backgroundMusic.paused) {
+                playMusic();
+            }
+        }, { once: true });
+</script>
 </body>
 </html>

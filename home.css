@@ -1,3 +1,38 @@
+@media (max-width: px) {
+    h1 {
+        font-size: 8vw;
+    }
+
+    #timer {
+        font-size: 6vw;
+        padding: 2vw;
+    }
+
+    .game {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2vw;
+    }
+
+    .item {
+        border-radius: 2vw;
+    }
+
+    .reset {
+        font-size: 6vw;
+        padding: 2vw;
+        border-radius: 2vw;
+    }
+
+    .popup .embed {
+        width: 90%;
+        height: 50%;
+    }
+
+    .pop, .thanks {
+        font-size: 6vw;
+    }
+}
+
 @font-face {
     font-family: 'cute';
     src: url(fonts/Litebulb\ 8-bit.ttf);
